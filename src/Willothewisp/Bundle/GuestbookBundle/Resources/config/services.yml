@@ -1,0 +1,4 @@
+services:
+#    willothewisp_guestbook.example:
+#        class: Willothewisp\Bundle\GuestbookBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

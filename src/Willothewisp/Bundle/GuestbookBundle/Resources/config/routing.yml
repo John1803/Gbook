@@ -1,0 +1,3 @@
+willothewisp_guestbook_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: WillothewispGuestbookBundle:Default:index }

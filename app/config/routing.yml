@@ -1,0 +1,5 @@
+willothewisp_guestbook:
+    resource: "@WillothewispGuestbookBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
