@@ -2,13 +2,16 @@
 
 namespace Willothewisp\Bundle\GuestbookBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Post
  *
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="Willothewisp\Bundle\GuestbookBundle\Entity\PostRepository")
+ *
  */
 class Post
 {
@@ -29,10 +32,16 @@ class Post
     private $author;
 
     /**
-     * @var \DateTime
-     *
+     * @Gedmo\Slug(fields={"author"})
+     * @ORM\Column(name="slug", length=255, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="createdAt", type="datetime")
      */
+
     private $createdAt;
 
     /**
@@ -55,7 +64,6 @@ class Post
      * @ORM\Column(name="rating", type="integer")
      */
     private $rating;
-
 
     /**
      * Get id
@@ -181,4 +189,23 @@ class Post
     {
         return $this->rating;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+
+
 }
