@@ -1,3 +1,7 @@
-willothewisp_guestbook_homepage:
+_homepage:
     path:     /hello/{name}
     defaults: { _controller: WillothewispGuestbookBundle:Default:index }
+
+_posts:
+    path: /
+    defaults: { _controller: WillothewispGuestbookBundle:Post:list }
