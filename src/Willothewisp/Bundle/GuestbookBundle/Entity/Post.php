@@ -210,7 +210,7 @@ class Post
     /**
      * @ORM\PrePersist
      */
-    public function setDomaineNameValue()
+    public function setDomainNameValue()
     {
 
         if($this->getUrl()) {
