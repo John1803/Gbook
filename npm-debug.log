@@ -1,0 +1,213 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install', 'less', '-g' ]
+2 info using npm@1.3.10
+3 info using node@v0.10.25
+4 verbose cache add [ 'less', null ]
+5 verbose cache add name=undefined spec="less" args=["less",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'less',
+6 verbose parsed url   path: 'less',
+6 verbose parsed url   href: 'less' }
+7 silly lockFile 0b439cf4-less less
+8 verbose lock less /home/ivan/.npm/0b439cf4-less.lock
+9 silly lockFile 0b439cf4-less less
+10 silly lockFile 0b439cf4-less less
+11 verbose addNamed [ 'less', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile e13833ab-less less@
+14 verbose lock less@ /home/ivan/.npm/e13833ab-less.lock
+15 silly addNameRange { name: 'less', range: '*', hasData: false }
+16 verbose url raw less
+17 verbose url resolving [ 'https://registry.npmjs.org/', './less' ]
+18 verbose url resolved https://registry.npmjs.org/less
+19 info trying registry request attempt 1 at 14:02:25
+20 verbose etag "9G18FIRLQY5KVKZESUC04XJ4V"
+21 http GET https://registry.npmjs.org/less
+22 http 304 https://registry.npmjs.org/less
+23 silly registry.get cb [ 304,
+23 silly registry.get   { date: 'Mon, 22 Dec 2014 12:02:25 GMT',
+23 silly registry.get     server: 'Apache',
+23 silly registry.get     via: '1.1 varnish',
+23 silly registry.get     'last-modified': 'Mon, 22 Dec 2014 12:02:25 GMT',
+23 silly registry.get     'cache-control': 'max-age=60',
+23 silly registry.get     etag: '"9G18FIRLQY5KVKZESUC04XJ4V"',
+23 silly registry.get     age: '35',
+23 silly registry.get     'x-served-by': 'cache-fra1233-FRA',
+23 silly registry.get     'x-cache': 'HIT',
+23 silly registry.get     'x-cache-hits': '1',
+23 silly registry.get     'x-timer': 'S1419249745.032989,VS0,VE0',
+23 silly registry.get     vary: 'Accept',
+23 silly registry.get     'content-length': '0',
+23 silly registry.get     'keep-alive': 'timeout=10, max=50',
+23 silly registry.get     connection: 'Keep-Alive' } ]
+24 verbose etag less from cache
+25 silly addNameRange number 2 { name: 'less', range: '*', hasData: true }
+26 silly addNameRange versions [ 'less',
+26 silly addNameRange   [ '1.0.10',
+26 silly addNameRange     '1.0.11',
+26 silly addNameRange     '1.0.14',
+26 silly addNameRange     '1.0.18',
+26 silly addNameRange     '1.0.19',
+26 silly addNameRange     '1.0.21',
+26 silly addNameRange     '1.0.32',
+26 silly addNameRange     '1.0.36',
+26 silly addNameRange     '1.0.5',
+26 silly addNameRange     '1.0.40',
+26 silly addNameRange     '1.0.41',
+26 silly addNameRange     '1.0.44',
+26 silly addNameRange     '1.1.0',
+26 silly addNameRange     '1.1.1',
+26 silly addNameRange     '1.1.2',
+26 silly addNameRange     '1.1.4',
+26 silly addNameRange     '1.1.5',
+26 silly addNameRange     '1.1.6',
+26 silly addNameRange     '1.2.0',
+26 silly addNameRange     '1.2.1',
+26 silly addNameRange     '1.2.2',
+26 silly addNameRange     '1.3.0',
+26 silly addNameRange     '1.3.1',
+26 silly addNameRange     '1.3.2',
+26 silly addNameRange     '1.3.3',
+26 silly addNameRange     '1.4.0-b1',
+26 silly addNameRange     '1.4.0-b2',
+26 silly addNameRange     '1.4.0-b3',
+26 silly addNameRange     '1.4.0-b4',
+26 silly addNameRange     '1.4.0',
+26 silly addNameRange     '1.4.1',
+26 silly addNameRange     '1.4.2',
+26 silly addNameRange     '1.5.0-b1',
+26 silly addNameRange     '1.5.0-b2',
+26 silly addNameRange     '1.5.0-b3',
+26 silly addNameRange     '1.5.0-b4',
+26 silly addNameRange     '1.5.0',
+26 silly addNameRange     '1.5.1',
+26 silly addNameRange     '1.6.0',
+26 silly addNameRange     '1.6.1',
+26 silly addNameRange     '1.6.2',
+26 silly addNameRange     '1.6.3',
+26 silly addNameRange     '1.7.0',
+26 silly addNameRange     '1.7.1',
+26 silly addNameRange     '1.7.3',
+26 silly addNameRange     '1.7.4',
+26 silly addNameRange     '1.7.5',
+26 silly addNameRange     '2.0.0-b1',
+26 silly addNameRange     '2.0.0-b2',
+26 silly addNameRange     '2.0.0-b3',
+26 silly addNameRange     '2.0.0',
+26 silly addNameRange     '2.1.0',
+26 silly addNameRange     '2.1.1',
+26 silly addNameRange     '2.1.2' ] ]
+27 verbose addNamed [ 'less', '2.1.2' ]
+28 verbose addNamed [ '2.1.2', '2.1.2' ]
+29 silly lockFile 07a00b06-less-2-1-2 less@2.1.2
+30 verbose lock less@2.1.2 /home/ivan/.npm/07a00b06-less-2-1-2.lock
+31 silly lockFile 07a00b06-less-2-1-2 less@2.1.2
+32 silly lockFile 07a00b06-less-2-1-2 less@2.1.2
+33 silly lockFile e13833ab-less less@
+34 silly lockFile e13833ab-less less@
+35 silly resolved [ { name: 'less',
+35 silly resolved     version: '2.1.2',
+35 silly resolved     description: 'Leaner CSS',
+35 silly resolved     homepage: 'http://lesscss.org',
+35 silly resolved     author: { name: 'Alexis Sellier', email: 'self@cloudhead.net' },
+35 silly resolved     contributors: [ [Object] ],
+35 silly resolved     bugs: { url: 'https://github.com/less/less.js/issues' },
+35 silly resolved     repository: { type: 'git', url: 'https://github.com/less/less.js.git' },
+35 silly resolved     licenses: [ [Object] ],
+35 silly resolved     bin: { lessc: './bin/lessc' },
+35 silly resolved     main: 'index',
+35 silly resolved     directories: { test: './test' },
+35 silly resolved     jam: { main: './dist/less.js' },
+35 silly resolved     engines: { node: '>=0.10.0' },
+35 silly resolved     scripts: { test: 'grunt test' },
+35 silly resolved     optionalDependencies:
+35 silly resolved      { 'graceful-fs': '^3.0.4',
+35 silly resolved        mime: '^1.2.11',
+35 silly resolved        request: '^2.48.0',
+35 silly resolved        mkdirp: '^0.5.0',
+35 silly resolved        'source-map': '^0.1.x',
+35 silly resolved        promise: '^6.0.1' },
+35 silly resolved     devDependencies:
+35 silly resolved      { diff: '^1.0',
+35 silly resolved        grunt: '^0.4.5',
+35 silly resolved        'grunt-contrib-clean': '^0.6.0',
+35 silly resolved        'grunt-contrib-concat': '^0.5.0',
+35 silly resolved        'grunt-contrib-connect': '^0.9.0',
+35 silly resolved        'grunt-contrib-jasmine': '^0.8.1',
+35 silly resolved        'grunt-contrib-jshint': '^0.10.0',
+35 silly resolved        'grunt-contrib-uglify': '^0.6.0',
+35 silly resolved        'grunt-shell': '^1.1.1',
+35 silly resolved        'grunt-browserify': '^3.2.0',
+35 silly resolved        matchdep: '^0.3.0',
+35 silly resolved        'time-grunt': '^1.0.0',
+35 silly resolved        'grunt-saucelabs': '^8.3.2' },
+35 silly resolved     keywords:
+35 silly resolved      [ 'compile less',
+35 silly resolved        'css nesting',
+35 silly resolved        'css variable',
+35 silly resolved        'css',
+35 silly resolved        'gradients css',
+35 silly resolved        'gradients css3',
+35 silly resolved        'less compiler',
+35 silly resolved        'less css',
+35 silly resolved        'less mixins',
+35 silly resolved        'less',
+35 silly resolved        'less.js',
+35 silly resolved        'lesscss',
+35 silly resolved        'mixins',
+35 silly resolved        'nested css',
+35 silly resolved        'parser',
+35 silly resolved        'preprocessor',
+35 silly resolved        'bootstrap css',
+35 silly resolved        'bootstrap less',
+35 silly resolved        'style',
+35 silly resolved        'styles',
+35 silly resolved        'stylesheet',
+35 silly resolved        'variables in css',
+35 silly resolved        'css less' ],
+35 silly resolved     readme: '[![npm version](https://badge.fury.io/js/less.svg)](http://badge.fury.io/js/less) [![Build Status](https://travis-ci.org/less/less.js.svg?branch=master)](https://travis-ci.org/less/less.js)\n[![Dependencies](https://david-dm.org/less/less.js.svg)](https://david-dm.org/less/less.js) [![devDependency Status](https://david-dm.org/less/less.js/dev-status.svg)](https://david-dm.org/less/less.js#info=devDependencies) [![optionalDependency Status](https://david-dm.org/less/less.js/optional-status.svg)](https://david-dm.org/less/less.js#info=optionalDependencies)\n[![Sauce Test Status](https://saucelabs.com/browser-matrix/less.svg)](https://saucelabs.com/u/less) [![Build status](https://ci.appveyor.com/api/projects/status/bx2qspy3qbuxpl9q/branch/master?svg=true)](https://ci.appveyor.com/project/lukeapage/less-js/branch/master)\n\n# [Less.js](http://lesscss.org)\n\n> The **dynamic** stylesheet language. [http://lesscss.org](http://lesscss.org).\n\nThis is the JavaScript, official, stable version of Less.\n\n\n## Getting Started\n\nOptions for adding Less.js to your project:\n\n* Install with [npm](https://npmjs.org): `npm install less`\n* [Download the latest release][download]\n* Clone the repo: `git clone https://github.com/less/less.js.git`\n\n## More information\n\nFor general information on the language, configuration options or usage visit [lesscss.org](http://lesscss.org).\n\nHere are other resources for using Less.js:\n\n* [stackoverflow.com][so] is a great place to get answers about Less.\n* [Less.js Issues][issues] for reporting bugs\n\n\n## Contributing\nPlease read [CONTRIBUTING.md](CONTRIBUTING.md). Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com).\n\n### Reporting Issues\n\nBefore opening any issue, please search for existing issues and read the [Issue Guidelines](https://github.com/necolas/issue-guidelines), written by [Nicolas Gallagher](https://github.com/necolas). After that if you find a bug or would like to make feature request, [please open a new issue][issues].\n\nPlease report documentation issues in [the documentation project](https://github.com/less/less-docs).\n\n### Development\n\nRead [Developing Less](http://lesscss.org/usage/#developing-less).\n\n## Release History\nSee the [changelog](CHANGELOG.md)\n\n## [License](LICENSE)\n\nCopyright (c) 2009-2014 [Alexis Sellier](http://cloudhead.io) & The Core Less Team\nLicensed under the [Apache License](LICENSE).\n\n\n[so]: http://stackoverflow.com/questions/tagged/twitter-bootstrap+less "StackOverflow.com"\n[issues]: https://github.com/less/less.js/issues "GitHub Issues for Less.js"\n[download]: https://github.com/less/less.js/zipball/master "Download Less.js"\n',
+35 silly resolved     readmeFilename: 'README.md',
+35 silly resolved     dependencies:
+35 silly resolved      { 'graceful-fs': '^3.0.4',
+35 silly resolved        mime: '^1.2.11',
+35 silly resolved        request: '^2.48.0',
+35 silly resolved        mkdirp: '^0.5.0',
+35 silly resolved        'source-map': '^0.1.x',
+35 silly resolved        promise: '^6.0.1' },
+35 silly resolved     _id: 'less@2.1.2',
+35 silly resolved     _from: 'less@' } ]
+36 info install less@2.1.2 into /usr/local/lib
+37 info installOne less@2.1.2
+38 info /usr/local/lib/node_modules/less unbuild
+39 info preuninstall less@2.1.2
+40 info uninstall less@2.1.2
+41 verbose true,/usr/local/lib/node_modules,/usr/local/lib/node_modules unbuild less@2.1.2
+42 verbose /usr/local/bin,[object Object] binRoot
+43 info /usr/local/lib/node_modules/less unbuild
+44 info preuninstall less@2.1.2
+45 info uninstall less@2.1.2
+46 verbose true,/usr/local/lib/node_modules,/usr/local/lib/node_modules unbuild less@2.1.2
+47 verbose /usr/local/bin,[object Object] binRoot
+48 error error rolling back Error: EACCES, unlink '/usr/local/bin/lessc'
+48 error error rolling back  less@2.1.2 { [Error: EACCES, unlink '/usr/local/bin/lessc'] errno: 3, code: 'EACCES', path: '/usr/local/bin/lessc' }
+49 error Error: EACCES, unlink '/usr/local/bin/lessc'
+49 error  { [Error: EACCES, unlink '/usr/local/bin/lessc'] errno: 3, code: 'EACCES', path: '/usr/local/bin/lessc' }
+50 error Please try running this command again as root/Administrator.
+51 error System Linux 3.13.0-32-generic
+52 error command "/usr/bin/nodejs" "/usr/bin/npm" "install" "less" "-g"
+53 error cwd /var/www/guestbook
+54 error node -v v0.10.25
+55 error npm -v 1.3.10
+56 error path /usr/local/bin/lessc
+57 error code EACCES
+58 error errno 3
+59 error stack Error: EACCES, unlink '/usr/local/bin/lessc'
+60 verbose exit [ 3, true ]
