@@ -23,10 +23,13 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('WillothewispGuestbookBundle:Post')->findAll();
+        $posts = $em->getRepository('WillothewispGuestbookBundle:Post')->findAll();
+
+        $form = $this->createCreateForm(new Post());
 
         return $this->render('WillothewispGuestbookBundle:Post:index.html.twig', array(
-            'entities' => $entities,
+            'form' => $form->createView(),
+            'posts' => $posts,
         ));
     }
     /**
@@ -35,21 +38,21 @@ class PostController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Post();
-        $form = $this->createCreateForm($entity);
+        $post = new Post();
+        $form = $this->createCreateForm($post);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($post);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('post_show', array('id' => $post->getId())));
         }
 
         return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(
-            'entity' => $entity,
+            'post' => $post,
             'form'   => $form->createView(),
         ));
     }
@@ -61,9 +64,9 @@ class PostController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Post $entity)
+    private function createCreateForm(Post $post)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
+        $form = $this->createForm(new PostType(), $post, array(
             'action' => $this->generateUrl('post_create'),
             'method' => 'POST',
         ));
@@ -79,11 +82,11 @@ class PostController extends Controller
      */
     public function newAction()
     {
-        $entity = new Post();
-        $form   = $this->createCreateForm($entity);
+        $post = new Post();
+        $form   = $this->createCreateForm($post);
 
         return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(
-            'entity' => $entity,
+            'post' => $post,
             'form'   => $form->createView(),
         ));
     }
@@ -96,39 +99,39 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
+        $post = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+        if (!$post) {
+            throw $this->createNotFoundException('Unable to find Post post.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('WillothewispGuestbookBundle:Post:show.html.twig', array(
-            'entity'      => $entity,
+            'post'      => $post,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Post entity.
+     * Displays a form to edit an existing Post post.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
+        $post = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+        if (!$post) {
+            throw $this->createNotFoundException('Unable to find Post post.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($post);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('WillothewispGuestbookBundle:Post:edit.html.twig', array(
-            'entity'      => $entity,
+            'post'      => $post,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -137,14 +140,14 @@ class PostController extends Controller
     /**
     * Creates a form to edit a Post entity.
     *
-    * @param Post $entity The entity
+    * @param Post $post The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Post $entity)
+    private function createEditForm(Post $post)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
-            'action' => $this->generateUrl('post_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PostType(), $post, array(
+            'action' => $this->generateUrl('post_update', array('id' => $post->getId())),
             'method' => 'PUT',
         ));
 
@@ -160,14 +163,14 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
+        $post = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Post entity.');
+        if (!$post) {
+            throw $this->createNotFoundException('Unable to find Post post.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($post);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -177,7 +180,7 @@ class PostController extends Controller
         }
 
         return $this->render('WillothewispGuestbookBundle:Post:edit.html.twig', array(
-            'entity'      => $entity,
+            'post'      => $post,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -193,13 +196,13 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
+            $post = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Post entity.');
+            if (!$post) {
+                throw $this->createNotFoundException('Unable to find Post post.');
             }
 
-            $em->remove($entity);
+            $em->remove($post);
             $em->flush();
         }
 

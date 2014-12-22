@@ -1,8 +1,8 @@
-{#{% extends 'WillothewispGuestbookBundle::layout.html.twig' %}#}
+{% ext,ends 'WillothewispGuestbookBundle::layout.html.twig' %}
 <div>
 {% for post in posts %}
     <div>{{ post.author }}</div>
-    <div>{{ post.website }}</div>
+    <div>{{ post.url }}</div>
     <div>{{ post.post }}</div>
 {% endfor %}
 </div>

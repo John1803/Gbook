@@ -1,14 +1,13 @@
-{% extends '::base.html.twig' %}
+{% extends 'WillothewispGuestbookBundle::layout.html.twig' %}
 
-{% block body -%}
+{% block content -%}
+{%  include 'WillothewispGuestbookBundle:Post:newPost.html.twig' with {'form': form} %}
     <h1>Post list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Author</th>
-                <th>Slug</th>
                 <th>Createdat</th>
                 <th>Website</th>
                 <th>Post</th>
@@ -17,22 +16,20 @@
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% for post in posts %}
             <tr>
-                <td><a href="{{ path('post_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.author }}</td>
-                <td>{{ entity.slug }}</td>
-                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.url }}</td>
-                <td>{{ entity.post }}</td>
-                <td>{{ entity.rating }}</td>
+                <td>{{ post.author }}</td>
+                <td>{% if post.createdAt %}{{ post.createdAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ post.url }}</td>
+                <td>{{ post.post }}</td>
+                <td>{{ post.rating }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('post_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('post_show', { 'id': post.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('post_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('post_edit', { 'id': post.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -44,8 +41,8 @@
         <ul>
         <li>
             <a href="{{ path('post_new') }}">
-                Create a new entry
+                Create a new post
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}
