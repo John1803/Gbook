@@ -23,7 +23,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $posts = $em->getRepository('WillothewispGuestbookBundle:Post')->findAll();
+        $posts = $em->getRepository('WillothewispGuestbookBundle:Post')->findNewest();
 
         $form = $this->createCreateForm(new Post());
 
@@ -48,7 +48,7 @@ class PostController extends Controller
             $em->persist($post);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('post_show', array('id' => $post->getId())));
+            return $this->redirect($this->generateUrl('post'));
         }
 
         return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(

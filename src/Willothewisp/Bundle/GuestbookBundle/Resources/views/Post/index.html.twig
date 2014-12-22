@@ -4,9 +4,7 @@
 <div class="container">
     {%  include 'WillothewispGuestbookBundle:Post:new.html.twig' with {'form': form} %}
 </div>
-    <h1>Post list</h1>
-
-    <table class="records_list">
+     <table class="records_list">
         <thead>
             <tr>
                 <th>Author</th>
@@ -23,7 +21,7 @@
                 <td>{{ post.author }}</td>
                 <td>{% if post.createdAt %}{{ post.createdAt|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ post.url }}</td>
-                <td>{{ post.post | truncate(83, '...') }}</td>
+                <td>{{ post.post | truncate(100, '...') }}</td>
                 <td>{{ post.rating }}</td>
                 <td>
                 <ul>
