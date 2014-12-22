@@ -2,85 +2,85 @@ posts:
     1:
         author: Unknovn Artist
         post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et dignissim massa. Cras dolor velit, finibus eget lobortis ut, cursus sit amet odio. Fusce ac auctor tortor. Nullam sit amet diam nibh. Nulla mattis, turpis id condimentum lacinia, justo ex imperdiet odio, id bibendum ex dui in eros. Aenean venenatis, lacus nec ullamcorper molestie, dolor tellus blandit metus, eu pharetra ipsum enim a nisl. Mauris tortor odio, accumsan non nibh vel, efficitur ultricies felis. Duis dictum velit nulla, sed dictum massa tristique vel. Ut ornare pellentesque vulputate. Aliquam erat volutpat. Aliquam sollicitudin dui ut libero interdum eleifend. Fusce fringilla at.
-        website: http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html
+        url: http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html
         rating: 4
     2:
         author: Nazar
         post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed faucibus urna. Nulla consectetur varius leo. Ut malesuada, erat vitae convallis ullamcorper, erat libero feugiat ante, vel volutpat est risus vel eros. Maecenas tristique dapibus ultricies. Donec turpis diam, cursus nec ante ut, mollis convallis eros. Vivamus vestibulum velit ut dolor sollicitudin posuere. Praesent et ante est. Nam ut enim magna. Nam tristique purus in leo finibus pulvinar. Sed hendrerit, lectus vitae pellentesque tempus, ex ipsum pulvinar lacus, vestibulum posuere elit ipsum at nibh. Maecenas blandit, justo non condimentum consectetur, sapien tortor facilisis justo, nec dignissim purus neque quis eros.
-        website: http://www.lipsum.com/feed/html
+        url: http://www.lipsum.com/feed/html
         rating: 3
     3:
         author: Sergey
         post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eleifend risus dignissim ante sodales, et placerat risus placerat. Ut pretium ante a dui feugiat consectetur. Donec quis tempor neque. Nulla varius augue a varius condimentum. Etiam fringilla pretium arcu, vitae dapibus metus laoreet vitae. In ac est faucibus, aliquam mi sed, molestie nisi. Aliquam ac magna sit amet enim auctor dictum. Maecenas at placerat lectus, iaculis sagittis nulla. Sed quis odio maximus, pharetra risus sed, hendrerit nibh. Nam eget congue tortor. Pel
-        website: http://habrahabr.ru/post/150131/
+        url: http://habrahabr.ru/post/150131/
         rating: 5
     4:
         author: Vadim
         post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac metus nec est dictum interdum. Ut sit amet pretium magna. In consectetur diam quis lectus mattis, eget gravida ligula porta. Praesent efficitur, massa condimentum tempus rhoncus, tellus leo finibus risus, elementum elementum neque leo non nibh. Maecenas auctor posuere facilisis. Morbi eu ante tortor. Nunc elementum eleifend efficitur. Sed eleifend facilisis imperdiet. Fusce volutpat laoreet erat, ac molestie arcu ultricies vitae. Vestibulum gravida quam dolor, vitae sodales mi mollis ac. Nunc ac tristique lorem, eu auctor lectus. Sed accumsan nibh accumsan arcu eleifend, vitae luctus diam blandit. Nunc porta.
-        website: http://symfony.com/doc/current/components/yaml/introduction.html
+        url: http://symfony.com/doc/current/components/yaml/introduction.html
         rating: 9
     5:
         author: Victor
         post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at sapien nec neque molestie condimentum vel in urna. Phasellus congue nisl in pretium tincidunt. Vivamus maximus sem et sagittis maximus. Nulla facilisi. Maecenas id viverra nunc. Donec mattis odio vel quam facilisis, id tincidunt mauris aliquam. Nunc feugiat cursus nisi, commodo elementum nulla aliquam a. Duis dapibus iaculis nibh, at semper ipsum commodo quis. Nullam risus augue, suscipit eu sapien ac, porttitor pretium mi. Ut consectetur pretium libero. Nunc molestie mi volutpat massa consequat, volutpat mattis ante semper. Sed id ipsum blandit, elementum urna non, luctus purus. In a.
-        website: http://www.strangebuzz.com/post/2012/01/28/Load-fixtures-with-Symfony2
+        url: http://www.strangebuzz.com/post/2012/01/28/Load-fixtures-with-Symfony2
         rating: 5
     6:
         author: Maxim
         post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at urna id urna venenatis pretium. Vivamus id ornare lacus. Integer interdum pretium metus, ut molestie lacus venenatis eu. Praesent gravida massa id ullamcorper posuere. Fusce id sapien turpis. Nulla eget aliquam orci. Donec dictum ullamcorper tincidunt. Nam finibus ipsum nec faucibus consectetur. Fusce facilisis, purus quis faucibus venenatis, nisl purus lobortis ante, sed facilisis tortor libero sed nulla. Maecenas accumsan, erat ut maximus pulvinar, mi risus porta tellus, id commodo tortor dolor vitae nunc. Vivamus blandit odio eu dictum lacinia. Donec volutpat nulla sem, nec ultrices leo laoreet eu.
-        website: https://www.yammer.com/
+        url: https://www.yammer.com/
         rating: 10
     7:
         author: Dmytro
         post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut euismod tempus risus, vel ultricies odio ultricies ut. Pellentesque nibh dolor, convallis at viverra at, consectetur ornare elit. Fusce facilisis felis dolor, non viverra metus malesuada id. Nunc congue elementum elit a ullamcorper. Donec pulvinar iaculis ipsum, a placerat dui ornare et. Morbi bibendum turpis sit amet dui luctus volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi rhoncus condimentum cursus. Proin nec nunc finibus ex iaculis elementum. Nulla consequat justo quis facilisis rhoncus. Nulla luctus augue ut turpis porttitor, eget imperdiet ante tempor. In nec velit.
-        website: http://habrahabr.ru/post/46659/
+        url: http://habrahabr.ru/post/46659/
         rating: 8
     8:
         author: Ruslan
         post:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et pretium risus, laoreet molestie nunc. Etiam aliquet vehicula lectus et egestas. Aenean efficitur ligula a sagittis pellentesque. Sed ut lobortis velit. Mauris eu pharetra enim. Proin vitae ligula sed nulla mollis tempus varius id enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin pulvinar ex porta, hendrerit dolor in, tincidunt sem. Aenean rhoncus molestie est ut varius. Ut quis orci lorem. Donec vel elementum urna, in posuere tortor. Aliquam ut ipsum aliquet, pretium purus a, dignissim dolor. Vestibulum ante leo, tempor sed molestie.
-        website: http://blog.mugunthkumar.com/articles/restful-api-server-doing-it-the-right-way-part-1/
+        url: http://blog.mugunthkumar.com/articles/restful-api-server-doing-it-the-right-way-part-1/
         rating: 5
     9:
         author: Leonid
         post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac felis in urna porttitor lacinia id id metus. Morbi egestas felis mauris, ac aliquam risus scelerisque non. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur eu arcu at velit vulputate aliquet. Fusce consequat nisl risus, non malesuada tellus tincidunt nec. Nulla vel accumsan est, semper posuere odio. Quisque euismod nibh ullamcorper, suscipit est non, commodo nibh. Donec sed ullamcorper ligula. Aenean vulputate porttitor odio, sed condimentum urna venenatis id. Mauris nisl tortor, elementum a blandit eget, vulputate ut velit. Duis porta nibh quis libero dapibus mollis.
-        website: https://gist.github.com/isaacs/579814
+        url: https://gist.github.com/isaacs/579814
         rating: 2
     10:
         author: Antin
         post: Curabitur malesuada id risus a egestas. Suspendisse elementum non nisl eu lobortis. Nam pharetra molestie mauris ut dignissim. Donec mollis orci ut tellus ullamcorper fermentum. Fusce tortor libero, tincidunt in ipsum in, ullamcorper ornare enim. In in nibh justo. Pellentesque vel convallis nunc. Ut accumsan orci nec tincidunt maximus. Aliquam sagittis tellus et varius bibendum. Donec luctus diam dictum, fringilla elit vitae, faucibus leo. Morbi at malesuada erat, a vulputate ante. Duis placerat magna mi. Donec finibus accumsan maximus. Mauris nec ipsum sed lacus facilisis lacinia quis non tellus. Praesent imperdiet.
-        website: http://softwaremaniacs.org/blog/category/primer/
+        url: http://softwaremaniacs.org/blog/category/primer/
         rating: 10
     11:
         author: Pavlo
         post: Sed sed lorem pulvinar, placerat nulla sed, faucibus tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam suscipit urna mauris, at hendrerit nisi pellentesque eget. Fusce condimentum suscipit ex, ut interdum magna placerat nec. Suspendisse venenatis tincidunt porttitor. Ut eros eros, porta ac imperdiet quis, sagittis eu sapien. Mauris mi libero, porta in congue nec, luctus id velit. Maecenas blandit aliquet leo. Aliquam erat volutpat. Morbi tortor erat, vehicula et mi ut, fermentum fermentum lectus. Phasellus mollis sit amet metus vel commodo. Vivamus vestibulum, magna.
-        website: 7
+        url: 7
         rating: 4
     12:
         author: Adrian
         post: Duis nec vulputate enim, ac sollicitudin nibh. Curabitur porta hendrerit quam, id commodo nulla ultrices ut. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse pulvinar leo mi, id consectetur tellus interdum blandit. Maecenas aliquam vitae justo vitae tincidunt. Etiam nec diam justo. Etiam cursus aliquam enim, sed bibendum orci molestie vel. Vestibulum odio leo, porttitor sit amet justo et, venenatis gravida nunc. Etiam eleifend, enim in euismod fringilla, tortor ante ultrices est, in molestie tortor nisi ac enim. Mauris vehicula interdum molestie. Donec sed fermentum nisi.
-        website: http://elegantcode.com/2010/10/22/basic-javascript-part-1-functions/
+        url: http://elegantcode.com/2010/10/22/basic-javascript-part-1-functions/
         rating: 6
     13:
         author: Petro
         post: Vivamus et ligula sit amet sem aliquet ornare. Praesent malesuada elementum ante. Quisque at posuere mi. Cras dolor massa, iaculis sit amet cursus at, ullamcorper sed ipsum. Curabitur in sapien sed quam imperdiet elementum eleifend at neque. Proin sodales turpis sollicitudin, tempor magna a, efficitur leo. Morbi quis aliquet tortor. Donec convallis faucibus purus sed consectetur. Curabitur egestas a ligula vitae ultrices. Vestibulum convallis, orci vel congue ultrices, quam felis iaculis augue, tristique molestie turpis arcu eu mauris. Ut mauris massa, fringilla et convallis ac, eleifend ut tellus. Phasellus eu ullamcorper.
-        website: http://www.codecademy.com/skills/make-a-website
+        url: http://www.codecademy.com/skills/make-a-website
         rating: 2
     14:
         author: Mike
         post: Sed semper quam sit amet imperdiet ultricies. Nullam pretium, enim nec suscipit efficitur, nisl libero laoreet ligula, nec dictum ex est sit amet diam. Proin eu gravida turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse lobortis hendrerit metus ut dignissim. Sed vel varius lectus. Phasellus tincidunt fringilla nisl quis elementum.
-        website: http://www.mysql.ru/docs/man/Date_calculations.html
+        url: http://www.mysql.ru/docs/man/Date_calculations.html
         rating: 1
     15:
         author: Tom
         post: Sed ac lectus sit amet diam tincidunt consectetur euismod eget risus. Cras id ornare lacus, eu facilisis quam. Fusce id tellus eu libero congue placerat sed ac massa. Morbi at quam metus. Nullam tempor ante et erat tristique, vel placerat lorem fermentum. Quisque arcu sem, dapibus vel euismod sed, ultricies id neque. Fusce non suscipit leo. Ut dapibus ex ultrices laoreet sagittis. Praesent pellentesque iaculis odio, sit amet pretium eros consequat ut. Curabitur finibus justo eget sagittis varius. Maecenas porta magna eget libero aliquet aliquet. Nam eu leo vestibulum, condimentum magna.
-        website: http://maccentre.ru/lib/2191/
+        url: http://maccentre.ru/lib/2191/
         rating: 5
     16:
         author: Andrij
         post: Aliquam congue aliquam neque, sit amet auctor nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed rhoncus fringilla eros sit amet volutpat. Phasellus laoreet, turpis et blandit volutpat, massa neque lacinia mauris, quis rutrum leo dui quis lorem. Nam fringilla ultricies ex, in fringilla elit maximus eu. Ut in sapien non diam placerat porta nec id dui. Ut et velit pellentesque, aliquet dolor viverra, volutpat enim. Nullam fermentum imperdiet elit, id scelerisque erat feugiat nec. Nam ut sodales ex, eu lobortis enim. Aliquam erat volutpat.
-        website: http://sc0rp1us.blogspot.com/2012/01/locales-debianubuntu.html
+        url: http://sc0rp1us.blogspot.com/2012/01/locales-debianubuntu.html
         rating: 5
     17:
         author: Anna
         post: Ut mattis augue a congue porttitor. Vivamus at vestibulum urna. Suspendisse quis consequat enim. Sed ut tortor tortor. Donec vehicula mollis magna a pretium. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque non dui ut diam pharetra auctor. Proin nibh enim, bibendum at ullamcorper non, dapibus in eros. Pellentesque nec mi ac libero imperdiet laoreet eget quis ex. Maecenas at rhoncus arcu, a vulputate justo.
-        website: http://hdd-911.com/index.php?option=content&task=view&id=27&Itemid=27
+        url: http://hdd-911.com/index.php?option=content&task=view&id=27&Itemid=27
         rating: 10

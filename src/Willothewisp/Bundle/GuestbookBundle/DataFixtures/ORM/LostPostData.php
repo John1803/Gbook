@@ -18,7 +18,7 @@ class LoadPostData implements FixtureInterface
             $post
                 ->setAuthor($value['author'])
                 ->setPost($value['post'])
-                ->setWebsite($value['website'])
+                ->setUrl($value['url'])
                 ->setRating($value['rating'])
             ;
 

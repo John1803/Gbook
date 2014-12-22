@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="Willothewisp\Bundle\GuestbookBundle\Entity\PostRepository")
+ * @ORM\HasLifecycleCallbacks()
  *
  */
 class Post
@@ -204,6 +205,17 @@ class Post
     public function setSlug($slug)
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDomaineNameValue()
+    {
+
+        if($this->getUrl()) {
+            $this->url = parse_url($this->getUrl(), PHP_URL_HOST);
+        }
     }
 
     public function __toString()
