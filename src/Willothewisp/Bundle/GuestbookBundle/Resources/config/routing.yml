@@ -1,7 +1,3 @@
-_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: WillothewispGuestbookBundle:Default:index }
-
-_posts:
-    path: /
-    defaults: { _controller: WillothewispGuestbookBundle:Post:list }
+_guestbook:
+    resource: "@WillothewispGuestbookBundle/Resources/config/routing/post.yml"
+    prefix:   /

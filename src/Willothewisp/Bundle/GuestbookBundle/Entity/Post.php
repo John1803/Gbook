@@ -47,9 +47,9 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="website", type="string", length=255)
+     * @ORM\Column(name="url", type="string", length=255)
      */
-    private $website;
+    private $url;
 
     /**
      * @var string
@@ -122,26 +122,26 @@ class Post
     }
 
     /**
-     * Set website
+     * Set url
      *
-     * @param string $website
+     * @param string $url
      * @return Post
      */
-    public function setWebsite($website)
+    public function setUrl($url)
     {
-        $this->website = $website;
+        $this->url = $url;
 
         return $this;
     }
 
     /**
-     * Get website
+     * Get url
      *
      * @return string 
      */
-    public function getWebsite()
+    public function getUrl()
     {
-        return $this->website;
+        return $this->url;
     }
 
     /**
@@ -206,6 +206,9 @@ class Post
         $this->slug = $slug;
     }
 
-
+    public function __toString()
+    {
+        return $this->getUrl();
+    }
 
 }
