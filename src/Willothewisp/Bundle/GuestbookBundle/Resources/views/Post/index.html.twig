@@ -1,14 +1,16 @@
 {% extends 'WillothewispGuestbookBundle::layout.html.twig' %}
 
 {% block content -%}
-{%  include 'WillothewispGuestbookBundle:Post:newPost.html.twig' with {'form': form} %}
+<div class="container">
+    {%  include 'WillothewispGuestbookBundle:Post:new.html.twig' with {'form': form} %}
+</div>
     <h1>Post list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
                 <th>Author</th>
-                <th>Createdat</th>
+                <th>Created</th>
                 <th>Website</th>
                 <th>Post</th>
                 <th>Rating</th>
@@ -21,7 +23,7 @@
                 <td>{{ post.author }}</td>
                 <td>{% if post.createdAt %}{{ post.createdAt|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ post.url }}</td>
-                <td>{{ post.post }}</td>
+                <td>{{ post.post | truncate(83, '...') }}</td>
                 <td>{{ post.rating }}</td>
                 <td>
                 <ul>
@@ -37,12 +39,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('post_new') }}">
-                Create a new post
-            </a>
-        </li>
-    </ul>
 {% endblock %}

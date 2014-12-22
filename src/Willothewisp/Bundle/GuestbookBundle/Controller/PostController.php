@@ -58,9 +58,9 @@ class PostController extends Controller
     }
 
     /**
-     * Creates a form to create a Post entity.
+     * Creates a form to create a Post post.
      *
-     * @param Post $entity The entity
+     * @param Post $post The post
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -77,7 +77,7 @@ class PostController extends Controller
     }
 
     /**
-     * Displays a form to create a new Post entity.
+     * Displays a form to create a new Post post.
      *
      */
     public function newAction()
