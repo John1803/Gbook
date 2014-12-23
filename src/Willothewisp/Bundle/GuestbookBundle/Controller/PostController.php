@@ -39,10 +39,10 @@ class PostController extends Controller
      * Lists of Post entities sorted by author.
      */
 
-//    public function postsByAuthorAction()
-//    {
-//
-//    }
+    public function postsByAuthorAction()
+    {
+
+    }
     /**
      * Creates a new Post entity.
      *
@@ -123,6 +123,38 @@ class PostController extends Controller
     }
 
     /**
+     * Finds and displays a Post entity associated with author.
+     */
+    public function postsAssociatedWithAuthorAction($slug)
+    {
+        $posts = $this->get('willothewisp_guestbook.post.repository')->findPostsAssociatedWithAuthor($slug);
+
+        if (!$posts) {
+            throw $this->createNotFoundException('Unable to find Post post.');
+        }
+
+        return $this->render('WillothewispGuestbookBundle:Post:postsAssociatedWithAuthor.html.twig', array(
+            'posts' => $posts,
+        ));
+    }
+
+    /**
+     * Finds and displays a Post entity associated with author.
+     */
+    public function postsAssociatedWithDomainAction($url)
+    {
+        $posts = $this->get('willothewisp_guestbook.post.repository')->findPostsAssociatedWithDomain($url);
+
+        if (!$posts) {
+            throw $this->createNotFoundException('Unable to find Post post.');
+        }
+
+        return $this->render('WillothewispGuestbookBundle:Post:postsAssociatedWithAuthor.html.twig', array(
+            'posts' => $posts,
+        ));
+    }
+
+    /**
      * Displays a form to edit an existing Post post.
      *
      */
@@ -179,6 +211,7 @@ class PostController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $em->flush();
 
             return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
@@ -200,13 +233,12 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $post = $this->get('willothewisp_guestbook.post.repository')->find($id);
 
             if (!$post) {
                 throw $this->createNotFoundException('Unable to find Post post.');
             }
-
+            $em = $this->getDoctrine()->getManager();
             $em->remove($post);
             $em->flush();
         }

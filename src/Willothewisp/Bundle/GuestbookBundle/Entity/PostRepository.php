@@ -17,16 +17,27 @@ class PostRepository extends EntityRepository
         return $this->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+            ;
     }
 
-    public function findAllByAuthor($author = null)
+    public function findPostsAssociatedWithAuthor($slug)
     {
         return $this->createQueryBuilder('p')
-            ->where('p.author = :author')
-            ->setParameter('author', $author)
+            ->where('p.slug = :author')
+            ->setParameter('author', $slug)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+            ;
     }
 
+    public function findPostsAssociatedWithDomain($url)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.url = :url')
+            ->setParameter('url', $url)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
