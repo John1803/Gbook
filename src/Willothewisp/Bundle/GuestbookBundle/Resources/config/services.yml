@@ -1,9 +1,19 @@
-services:
+parameters:
+    post.repository: WillothewispGuestbookBundle:Post
 
-  twig.extension.text:
-           class: Twig_Extensions_Extension_Text
-           tags:
-               - { name: twig.extension }
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+
+    willothewisp_guestbook.post.repository:
+        class: Willothewisp\Bundle\GuestbookBundle\Entity\PostRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - %post.repository%
+
+
 #    willothewisp_guestbook.example:
 #        class: Willothewisp\Bundle\GuestbookBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]

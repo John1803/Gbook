@@ -19,4 +19,14 @@ class PostRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findAllByAuthor($author = null)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.author = :author')
+            ->setParameter('author', $author)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

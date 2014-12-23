@@ -5,6 +5,11 @@ post:
 post_show:
     path:     /{id}/show
     defaults: { _controller: "WillothewispGuestbookBundle:Post:show" }
+#    requirements: \+d
+
+#post_show_by_author:
+#    path: /{author}/show
+#    defaulrts: { _controller: "WillothewispGuestbookBundle:Post:postsByAuthorAction" }
 
 post_new:
     path:     /new

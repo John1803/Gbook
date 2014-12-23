@@ -21,9 +21,11 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $posts = $em->getRepository('WillothewispGuestbookBundle:Post')->findNewest();
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $posts = $em->getRepository('WillothewispGuestbookBundle:Post')->findNewest();
+        $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();;
+//        $posts = $postRepository->findNewest();
 
         $form = $this->createCreateForm(new Post());
 
@@ -32,6 +34,15 @@ class PostController extends Controller
             'posts' => $posts,
         ));
     }
+
+    /**
+     * Lists of Post entities sorted by author.
+     */
+
+//    public function postsByAuthorAction()
+//    {
+//
+//    }
     /**
      * Creates a new Post entity.
      *
@@ -97,9 +108,7 @@ class PostController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $post = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
+       $post = $this->get('willothewisp_guestbook.post.repository')->find($id);
 
         if (!$post) {
             throw $this->createNotFoundException('Unable to find Post post.');
@@ -119,9 +128,7 @@ class PostController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $post = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
+        $post = $this->get('willothewisp_guestbook.post.repository')->find($id);
 
         if (!$post) {
             throw $this->createNotFoundException('Unable to find Post post.');
@@ -161,9 +168,7 @@ class PostController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $post = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
+        $post = $this->get('willothewisp_guestbook.post.repository')->find($id);
 
         if (!$post) {
             throw $this->createNotFoundException('Unable to find Post post.');
@@ -196,7 +201,7 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $post = $em->getRepository('WillothewispGuestbookBundle:Post')->find($id);
+            $post = $this->get('willothewisp_guestbook.post.repository')->find($id);
 
             if (!$post) {
                 throw $this->createNotFoundException('Unable to find Post post.');
