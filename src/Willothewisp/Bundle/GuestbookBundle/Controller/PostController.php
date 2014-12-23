@@ -54,7 +54,10 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
+            $request->getSession()->getFlashBag()->add(
+                'create',
+                    'Congradulation! Your message was saved! Would you like to add one more message'
+            );
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
@@ -125,9 +128,9 @@ class PostController extends Controller
     /**
      * Finds and displays a Post entity associated with author.
      */
-    public function postsAssociatedWithAuthorAction($slug)
+    public function postsAssociatedWithAuthorAction($author)
     {
-        $posts = $this->get('willothewisp_guestbook.post.repository')->findPostsAssociatedWithAuthor($slug);
+        $posts = $this->get('willothewisp_guestbook.post.repository')->findPostsAssociatedWithAuthor($author);
 
         if (!$posts) {
             throw $this->createNotFoundException('Unable to find Post post.');

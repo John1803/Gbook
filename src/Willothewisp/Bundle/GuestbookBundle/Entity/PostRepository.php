@@ -21,11 +21,11 @@ class PostRepository extends EntityRepository
             ;
     }
 
-    public function findPostsAssociatedWithAuthor($slug)
+    public function findPostsAssociatedWithAuthor($author)
     {
         return $this->createQueryBuilder('p')
-            ->where('p.slug = :author')
-            ->setParameter('author', $slug)
+            ->where('p.author = :author')
+            ->setParameter('author', $author)
             ->getQuery()
             ->getResult()
             ;

@@ -15,7 +15,7 @@ post_show_by_domain:
         url: ^(\w+://)?([^/]+)
 
 post_show_by_author:
-    path: /{slug}/posts
+    path: /{author}/posts
     defaults: { _controller: "WillothewispGuestbookBundle:Post:postsAssociatedWithAuthor" }
 
 
