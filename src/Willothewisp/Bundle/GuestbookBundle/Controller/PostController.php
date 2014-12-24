@@ -56,20 +56,12 @@ class PostController extends Controller
             $alreadyExistCookie = $request->cookies->get('name');
             if ($alreadyExistCookie) {
 
-                $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();;
-                $form = $this->createCreateForm(new Post());
-
                 $request->getSession()->getFlashBag()->add(
                     'notice',
                     'You have already created message! Try again lately!'
                 );
-                return $this->render('WillothewispGuestbookBundle:Post:index.html.twig', array(
-                    'form' => $form->createView(),
-                    'posts' => $posts,
-                ));
-
+                return $this->redirect($this->generateUrl('post'));
             }
-
             else {
                 $cookie = new Cookie('name', 'alreadySentPost', time() + 60);
 
@@ -82,13 +74,11 @@ class PostController extends Controller
 
                 $request->getSession()->getFlashBag()->add(
                     'notice',
-                    'Congratulations! You can create new message after 1 minute!'
+                    'Congratulations! Your message was saved! You can create new message after 1 minute!'
                 );
 
                 return $response;
             }
-
-
         }
 
         return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(
