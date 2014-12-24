@@ -40,4 +40,10 @@ class PostRepository extends EntityRepository
             ->getResult()
             ;
     }
+
+//    public function findOneNewest()
+//    {
+//        return $this->createQueryBuilder('p')
+//            ->
+//    }
 }

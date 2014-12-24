@@ -2,8 +2,11 @@
 
 namespace Willothewisp\Bundle\GuestbookBundle\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Cookie;
 
 use Willothewisp\Bundle\GuestbookBundle\Entity\Post;
 use Willothewisp\Bundle\GuestbookBundle\Form\PostType;
@@ -21,11 +24,7 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $posts = $em->getRepository('WillothewispGuestbookBundle:Post')->findNewest();
         $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();;
-//        $posts = $postRepository->findNewest();
 
         $form = $this->createCreateForm(new Post());
 
@@ -54,15 +53,42 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $request->getSession()->getFlashBag()->add(
-                'create',
-                    'Congradulation! Your message was saved! Would you like to add one more message'
-            );
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
+            $alreadyExistCookie = $request->cookies->get('name');
+            if ($alreadyExistCookie) {
 
-            return $this->redirect($this->generateUrl('post'));
+                $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();;
+                $form = $this->createCreateForm(new Post());
+
+                $request->getSession()->getFlashBag()->add(
+                    'notice',
+                    'You have already created message! Try again lately!'
+                );
+                return $this->render('WillothewispGuestbookBundle:Post:index.html.twig', array(
+                    'form' => $form->createView(),
+                    'posts' => $posts,
+                ));
+
+            }
+
+            else {
+                $cookie = new Cookie('name', 'alreadySentPost', time() + 60);
+
+                $response = new RedirectResponse($this->generateUrl('post'));
+                $response->headers->setCookie($cookie);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($post);
+                $em->flush();
+
+                $request->getSession()->getFlashBag()->add(
+                    'notice',
+                    'Congratulations! You can create new message after 1 minute!'
+                );
+
+                return $response;
+            }
+
+
         }
 
         return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(

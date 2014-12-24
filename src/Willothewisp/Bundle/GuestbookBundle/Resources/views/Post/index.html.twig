@@ -6,7 +6,7 @@
     {%  include 'WillothewispGuestbookBundle:Post:new.html.twig' with {'form': form} %}
 
     {% block flashMessage %}
-        {% for flashMessage in app.session.flashbag.get('create') %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
             {{ flashMessage }}
         {% endfor %}
     {% endblock %}
