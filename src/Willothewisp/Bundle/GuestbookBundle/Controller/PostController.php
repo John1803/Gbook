@@ -53,32 +53,36 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $alreadyExistCookie = $request->cookies->get('name');
-            if ($alreadyExistCookie) {
 
-                $request->getSession()->getFlashBag()->add(
-                    'notice',
-                    'You have already created message! Try again lately!'
-                );
-                return $this->redirect($this->generateUrl('post'));
-            }
-            else {
-                $cookie = new Cookie('name', sha1(1234,5678), time() + 60);
+            $result = $this->get('willothewisp_guestbook_post.timer.post.timer')->requestProcess($request);
 
-                $response = new RedirectResponse($this->generateUrl('post'));
-                $response->headers->setCookie($cookie);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($post);
-                $em->flush();
-
-                $request->getSession()->getFlashBag()->add(
-                    'notice',
-                    'Congratulations! Your message was saved! You can create new message after 1 minute!'
-                );
-
-                return $response;
-            }
+//            $alreadyExistCookie = $request->cookies->get('name');
+//            if ($alreadyExistCookie) {
+//
+//                $request->getSession()->getFlashBag()->add(
+//                    'notice',
+//                    'You have already created message! Try again lately!'
+//                );
+//                return $this->redirect($this->generateUrl('post'));
+//            }
+//            else {
+//                $cookie = new Cookie('name', sha1(1234,5678), time() + 60);
+//
+//                $response = new RedirectResponse($this->generateUrl('post'));
+//                $response->headers->setCookie($cookie);
+////
+//                $em = $this->getDoctrine()->getManager();
+//                $em->persist($post);
+//                $em->flush();
+//
+//                $request->getSession()->getFlashBag()->add(
+//                    'notice',
+//                    'Congratulations! Your message was saved! You can create new message after 1 minute!'
+//                );
+//
+//                return $response;
+//            }
+            var_dump($result);
         }
 
         return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(

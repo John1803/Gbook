@@ -1,5 +1,6 @@
 parameters:
     post.repository: WillothewispGuestbookBundle:Post
+    post.timer: Willothewisp\Bundle\GuestbookBundle\PostTimer\PostTimer
 
 services:
     twig.extension.text:
@@ -12,6 +13,9 @@ services:
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments:
             - %post.repository%
+
+    willothewisp_guestbook_post.timer.post.timer:
+        class: %post.timer%
 
 
 #    willothewisp_guestbook.example:
