@@ -63,7 +63,7 @@ class PostController extends Controller
                 return $this->redirect($this->generateUrl('post'));
             }
             else {
-                $cookie = new Cookie('name', 'alreadySentPost', time() + 60);
+                $cookie = new Cookie('name', sha1(1234,5678), time() + 60);
 
                 $response = new RedirectResponse($this->generateUrl('post'));
                 $response->headers->setCookie($cookie);
