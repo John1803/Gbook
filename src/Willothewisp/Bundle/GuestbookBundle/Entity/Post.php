@@ -33,6 +33,14 @@ class Post
     private $author;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+
+    private $status;
+
+    /**
      * @Gedmo\Slug(fields={"author"})
      * @ORM\Column(name="slug", length=255, unique=true)
      */
@@ -212,9 +220,18 @@ class Post
      */
     public function setDomainNameValue()
     {
-
         if($this->getUrl()) {
             $this->url = parse_url($this->getUrl(), PHP_URL_HOST);
+        }
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setStatusValue()
+    {
+        if(!$this->getStatus()) {
+            $this->status = 1;
         }
     }
 
@@ -223,5 +240,23 @@ class Post
     {
         return $this->getUrl();
     }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+
 
 }

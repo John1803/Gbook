@@ -1,0 +1,3 @@
+aretusa_flash_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AretusaFlashBundle:Default:index }

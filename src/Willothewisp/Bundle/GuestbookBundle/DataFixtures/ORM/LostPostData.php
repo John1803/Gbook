@@ -20,6 +20,7 @@ class LoadPostData implements FixtureInterface
                 ->setPost($value['post'])
                 ->setUrl($value['url'])
                 ->setRating($value['rating'])
+                ->setStatus($value['status'])
             ;
 
             $manager->persist($post);

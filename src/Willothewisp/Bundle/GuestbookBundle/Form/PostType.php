@@ -17,10 +17,20 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('author')
-            ->add('url')
-            ->add('post')
-            ->add('rating')
+            ->add('author', 'text', array(
+                'required' => true
+            ))
+            ->add('url', 'url', array(
+                'required' => true
+            ))
+            ->add('post', 'textarea')
+            ->add('rating', 'choice', array(
+                'choices' => array(
+                    '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5',
+                    '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10',
+                ),
+                'required' => true
+            ))
         ;
     }
 
@@ -40,6 +50,6 @@ class PostType extends AbstractType
      */
     public function getName()
     {
-        return 'willothewisp_bundle_guestbookbundle_post';
+        return 'guestbookbundle_post';
     }
 }

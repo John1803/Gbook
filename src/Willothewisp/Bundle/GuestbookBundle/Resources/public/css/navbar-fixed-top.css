@@ -2,3 +2,17 @@ body {
   min-height: 2000px;
   padding-top: 70px;
 }
+
+div.next-post-info {
+    position: fixed;
+    right: 15px;
+    background-color: red;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+}
+
+#countdown {
+    font-size: 24px;
+}
