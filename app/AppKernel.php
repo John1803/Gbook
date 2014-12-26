@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Willothewisp\Bundle\GuestbookBundle\WillothewispGuestbookBundle(),
+            new Aretusa\FlashBundle\AretusaFlashBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

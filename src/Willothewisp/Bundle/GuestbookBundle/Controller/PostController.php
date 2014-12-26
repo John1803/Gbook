@@ -2,7 +2,9 @@
 
 namespace Willothewisp\Bundle\GuestbookBundle\Controller;
 
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Willothewisp\Bundle\GuestbookBundle\Entity\Post;
@@ -24,7 +26,7 @@ class PostController extends Controller
 //        $em = $this->getDoctrine()->getManager();
 //
 //        $posts = $em->getRepository('WillothewispGuestbookBundle:Post')->findNewest();
-        $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();;
+        $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
 //        $posts = $postRepository->findNewest();
 
         $form = $this->createCreateForm(new Post());
@@ -50,19 +52,41 @@ class PostController extends Controller
     public function createAction(Request $request)
     {
         $post = new Post();
+        $post->setRating(5);
         $form = $this->createCreateForm($post);
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $request->getSession()->getFlashBag()->add(
-                'create',
-                    'Congradulation! Your message was saved! Would you like to add one more message'
-            );
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
 
-            return $this->redirect($this->generateUrl('post'));
+                if ($form->isValid()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($post);
+                    $em->flush();
+
+                    $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
+
+                    $request->getSession()->getFlashBag()->add(
+                        'success',
+                        'Congradulation! Your message was saved! Would you like to add one more message'
+                    );
+
+
+                    $response['success'] = true;
+
+                    $response['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
+                        'posts' => $posts,
+                    ));
+
+                    return new JsonResponse($response);
+
+    //                return $this->redirect($this->generateUrl('post'));
+                } else {
+                    $response['errors'] = $this->getErrorMessages($form);
+                    $response['success'] = false;
+
+                    return new JsonResponse($response);
+                }
+
         }
 
         return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(
@@ -136,9 +160,17 @@ class PostController extends Controller
             throw $this->createNotFoundException('Unable to find Post post.');
         }
 
-        return $this->render('WillothewispGuestbookBundle:Post:postsAssociatedWithAuthor.html.twig', array(
+        $response['success'] = true;
+
+        $response['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
             'posts' => $posts,
         ));
+
+        return new JsonResponse($response);
+
+//        return $this->render('WillothewispGuestbookBundle:Post:postsAssociatedWithAuthor.html.twig', array(
+//            'posts' => $posts,
+//        ));
     }
 
     /**
@@ -152,9 +184,18 @@ class PostController extends Controller
             throw $this->createNotFoundException('Unable to find Post post.');
         }
 
-        return $this->render('WillothewispGuestbookBundle:Post:postsAssociatedWithAuthor.html.twig', array(
+        $response['success'] = true;
+
+        $response['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
             'posts' => $posts,
         ));
+
+        return new JsonResponse($response);
+
+
+//        return $this->render('WillothewispGuestbookBundle:Post:postsAssociatedWithAuthor.html.twig', array(
+//            'posts' => $posts,
+//        ));
     }
 
     /**
@@ -264,5 +305,31 @@ class PostController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Get all the form errors and return it as an array
+     *
+     * @param Form $form
+     * @return array errors
+     */
+    private function getErrorMessages(\Symfony\Component\Form\Form $form) {
+        $errors = array();
+
+        foreach ($form->getErrors() as $key => $error) {
+            if ($form->isRoot()) {
+                $errors['#'][] = $error->getMessage();
+            } else {
+                $errors[] = $error->getMessage();
+            }
+        }
+
+        foreach ($form->all() as $child) {
+            if (!$child->isValid()) {
+                $errors[$child->getName()] = $this->getErrorMessages($child);
+            }
+        }
+
+        return $errors;
     }
 }

@@ -1,0 +1,29 @@
+# src/Willothewisp/Bundle/Resources/config/validation.yml
+Willothewisp\Bundle\GuestbookBundle\Entity\Post:
+    properties:
+        author:
+            - NotBlank: ~
+            - Length:
+                min: 6
+                minMessage: "Author must be at least {{ limit }} characters length"
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+        url:
+            - NotBlank: ~
+            - Url: ~
+        post:
+            - Length:
+                min: 2
+                max: 500
+                minMessage: "Post must be at least {{ limit }} characters length"
+        rating:
+            - NotBlank: ~
+            - Type:
+                type: integer
+                message: The value {{ value }} is not a valid {{ type }}.
+            - Range:
+                min: 1
+                max: 10
+                minMessage: You must be at least 1 tall to enter
+                maxMessage: You cannot be taller than 10 to enter

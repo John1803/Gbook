@@ -1,5 +1,9 @@
-{{ form_start(form) }}
-<div class="row">
+{% include 'BraincraftedBootstrapBundle::flash.html.twig' with { 'close': true } %}
+{#{% form_theme form 'WillothewispGuestbookBundle:Form:bootstrap_3_layout.html.twig' %}#}
+
+<form class="create-post" action="{{ path('post_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form(form) }}
+
     <div class="row">
         <div class="col-md-12">
             {{ form_row(form.author) }}
@@ -17,5 +21,4 @@
             {{ form_row(form.rating) }}
         </div>
     </div>
-</div>
-{{ form_rest(form) }}
+</form>
