@@ -4,6 +4,12 @@
     <div class="next-post-info">Next post may be sent via: <span id="countdown"></span></div>
     <div class="container">
         {%  include 'WillothewispGuestbookBundle:Post:new.html.twig' with {'form': form} %}
+
+        {% block flashMessage %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                {{ flashMessage }}
+            {% endfor %}
+        {% endblock %}
     </div>
      <table class="records_list">
         <thead>

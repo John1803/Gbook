@@ -11,6 +11,7 @@
             $.each( $form.serializeArray(), function(i, field) {
                 values[field.name] = field.value;
             });
+            values['ajax'] = true;
             //debugger;
             $.ajax({
                 url: $form.attr('action'),
