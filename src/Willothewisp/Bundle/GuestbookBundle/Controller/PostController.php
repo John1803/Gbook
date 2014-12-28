@@ -55,68 +55,106 @@ class PostController extends Controller
         $form = $this->createCreateForm($post);
         $form->handleRequest($request);
 
-        $withAjax = $request->request->get('ajax');
-
-        $response = $withAjax ? new JsonResponse() : new RedirectResponse('/');
+//        $ajaxRequest = $request->isXmlHttpRequest();
+//
+//        $response = $ajaxRequest  ? new JsonResponse() : new RedirectResponse('/');
 
         if ($form->isValid()) {
-            $result = $this->get('willothewisp_guestbook_post.timer.post.timer')->requestProcess($request, $response);
-
-            if ($result['doSave']) {
-                $request->getSession()->getFlashBag()->add(
-                    'success',
-                    $result['message']
-                );
-
+            if ($request->isXmlHttpRequest()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($post);
                 $em->flush();
 
-                if ($withAjax) {
-                    $result['success'] = true;
-
-                    $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
-
-                    $result['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
-                        'posts' => $posts,
-                    ));
-
-                    $response->setData($result);
-                }
-
-                return $response;
-
-            } else {
-
-                if ($withAjax) {
-                    $result['success'] = false;
-                }
+                $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
 
                 $request->getSession()->getFlashBag()->add(
-                    'error',
-                    $result['message']
+                    'success',
+                    'Congradulation! Your message was saved! Would you like to add one more message'
                 );
 
-                return $response;
-            }
-
-        } else {
-
-            if ($withAjax) {
-                $result['errors'] = $this->getErrorMessages($form);
-                $result['success'] = false;
-
-                $response->setData($result);
-                return $response;
+                $response['success'] = true;
+                $response['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
+                    'posts' => $posts,
+                ));
+                return new JsonResponse($response);
 
             } else {
+                $result = $this->get('willothewisp_guestbook_post.timer.post.timer')->requestProcess($request);
+                if ($result['doSave']) {
+                    $request->getSession()->getFlashBag()->add(
+                        'notice',
+                        $result['message']
+                    );
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($post);
+                    $em->flush();
+                }
+                $request->getSession()->getFlashBag()->add(
+                    'notice',
+                    $result['message']
+                );
+                return $result['response'];
+            }
+//            $result = $this->get('willothewisp_guestbook_post.timer.post.timer')->requestProcess($request, $response);
+//
+//            if ($result['doSave']) {
+//                $request->getSession()->getFlashBag()->add(
+//                    'success',
+//                    $result['message']
+//                );
+//
+//                $em = $this->getDoctrine()->getManager();
+//                $em->persist($post);
+//                $em->flush();
+//
+//                if ($withAjax) {
+//                    $result['success'] = true;
+//
+//                    $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
+//
+//                    $result['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
+//                        'posts' => $posts,
+//                    ));
+//
+//                    $response->setData($result);
+//                }
+//
+//                return $response;
+//
+//            } else {
+//
+//                if ($withAjax) {
+//                    $result['success'] = false;
+//                }
+//
+//                $request->getSession()->getFlashBag()->add(
+//                    'error',
+//                    $result['message']
+//                );
+//
+//                return $response;
+//            }
+//
+//        } else {
+//
+//            if ($withAjax) {
+//                $result['errors'] = $this->getErrorMessages($form);
+//                $result['success'] = false;
+//
+//                $response->setData($result);
+//                return $response;
+//
+//            } else {
+//                return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(
+//                    'post' => $post,
+//                    'form'   => $form->createView(),
+//                ));
+            }
+
                 return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(
                     'post' => $post,
                     'form'   => $form->createView(),
                 ));
-            }
-
-        }
     }
 
     /**
