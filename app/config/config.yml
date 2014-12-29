@@ -111,15 +111,16 @@ nomaya_social:
             width:          300
             showFaces:      false
             layout:         "button_count"
+            share:          false
         twitter:
             url:            null
             locale:         "en_US"
-            message:        "Je veux partager ça avec vous"
+            message:        "I want to share that with you"
             text:           "Tweet"
-            via:            "L'Equipe cartedevisitevirtuelle.fr"
+            via:            "Team of guestbook.com"
             tag:            "ttot"
         googleplus:
-            url:            null
+            url:            http://guestbook.com
             locale :        "en_US"
             size :          "medium"
             annotation :    "bubble"
