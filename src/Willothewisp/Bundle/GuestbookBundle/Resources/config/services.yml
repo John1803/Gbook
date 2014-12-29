@@ -17,6 +17,18 @@ services:
     willothewisp_guestbook_post.timer.post.timer:
         class: %post.timer%
 
+    willothewisp.socialBarHelper:
+        class : Willothewisp\Bundle\GuestbookBundle\Templating\Helper\SocialBarHelper
+        tags :
+          - {name : 'templating.helper', alias : 'social-buttons'}
+        arguments : [ @templating ]
+
+    twig.extension.willothewisp_social_bar:
+        class: Willothewisp\Bundle\GuestbookBundle\Twig\Extensions\WillothewispTwigSocialBar
+        tags:
+            - { name: 'twig.extension' }
+        arguments : [ @service_container ]
+
 
 #    willothewisp_guestbook.example:
 #        class: Willothewisp\Bundle\GuestbookBundle\Example
