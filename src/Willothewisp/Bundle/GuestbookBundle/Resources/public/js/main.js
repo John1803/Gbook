@@ -11,63 +11,24 @@
             $.each( $form.serializeArray(), function(i, field) {
                 values[field.name] = field.value;
             });
-            values['ajax'] = true;
-            //debugger;
+
             $.ajax({
                 url: $form.attr('action'),
                 type: $form.attr('method'),
                 data: values,
                 success: function(data) {
                     if (data['success'] === true) {
-                        console.log(data);
+                        clearFormMessages($form);
+
                         $($table).find('tbody').html(data['html']);
-
                         $($form).trigger("reset");
-                        $($form).find('div').removeClass('has-error');
-                        $($form).find('span.help-block').remove();
-
                         $form.find('button:submit').attr('disabled', true);
 
-                        var seconds = 60,
-                            secondsLeft = 60,
-                            $nextPostInfo = $(".next-post-info"),
-                            $countdown = $("#countdown"),
-
-                            timer = setInterval(function () {
-                                secondsLeft = secondsLeft - 1;
-                                // format countdown string + set tag value
-                                $($nextPostInfo).show();
-                                $($countdown).html(secondsLeft + "s");
-                            }, 1000);
-
-                        setTimeout(function() {
-                            $form.find('button:submit').attr('disabled', false);
-                            clearInterval(timer);
-                            $($nextPostInfo).hide();
-                        }, seconds * 1000);
-
-                        $('#flash-messages').flashNotification('addSuccess', data['messages']['success']);
-
+                        addSuccessMessage($($form).parent(), data['messages']['success']);
+                        createTimerSend(60);
                     } else {
-
-                        $($form).find('span.help-block').remove();
-                        $($form).find('div').removeClass('has-error');
-
-                        $.each(data.errors, function(key, value) {
-                            var $input = $('#guestbookbundle_post_' + key),
-                                $parentInput = $($input).parent();
-
-                            $parentInput.addClass('has-error');
-
-                            $('<span class="help-block">' +
-                                '<ul class="list-unstyled">' +
-                                    '<li>' +
-                                        '<span class="glyphicon glyphicon-exclamation-sign"></span>' +
-                                        value +
-                                    '</li>' +
-                                '</ul>' +
-                            '</span>').appendTo($parentInput);
-                        });
+                        clearFormMessages($form);
+                        addErrorForm(data.errors);
                     }
                 }
             });
@@ -82,6 +43,59 @@
             posting.done(function( data ) {
                 $($table).find('tbody').html(data['html']);
             });
-        })
+        });
+
+
     });
+
+    var clearFormMessages = function($form) {
+        $('.container > div.alert.alert-success').remove();
+
+        $($form).find('span.help-block').remove();
+        $($form).find('div').removeClass('has-error');
+    };
+
+    var addSuccessMessage = function($container, message) {
+        $('<div class="alert alert-success">' +
+            '<button class="close" data-dismiss="alert" type="button">×</button>' +
+            message +
+        '</div>').prependTo($container);
+    };
+
+    var addErrorForm = function(errors) {
+        $.each(errors, function(key, value) {
+            var $input = $('#guestbookbundle_post_' + key),
+                $parentInput = $($input).parent();
+
+            $parentInput.addClass('has-error');
+
+            $('<span class="help-block">' +
+                '<ul class="list-unstyled">' +
+                    '<li>' +
+                        '<span class="glyphicon glyphicon-exclamation-sign"></span>' +
+                        value +
+                    '</li>' +
+                '</ul>' +
+            '</span>').appendTo($parentInput);
+        });
+    };
+
+    var createTimerSend = function(seconds) {
+        var secondsLeft = seconds,
+            $nextPostInfo = $(".next-post-info"),
+            $countdown = $("#countdown"),
+
+            timer = setInterval(function () {
+                secondsLeft = secondsLeft - 1;
+                // format countdown string + set tag value
+                $($nextPostInfo).show();
+                $($countdown).html(secondsLeft + "s");
+            }, 1000);
+
+        setTimeout(function() {
+            $('button:submit').attr('disabled', false);
+            clearInterval(timer);
+            $($nextPostInfo).hide();
+        }, seconds * 1000);
+    }
 })(jQuery);

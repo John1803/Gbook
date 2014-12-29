@@ -55,7 +55,7 @@ class PostController extends Controller
         $form = $this->createCreateForm($post);
         $form->handleRequest($request);
 
-        $withAjax = $request->request->get('ajax');
+        $withAjax = $request->isXmlHttpRequest();
 
         $response = $withAjax ? new JsonResponse() : new RedirectResponse('/');
 
