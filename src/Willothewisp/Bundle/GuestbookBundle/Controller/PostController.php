@@ -2,12 +2,11 @@
 
 namespace Willothewisp\Bundle\GuestbookBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 use Willothewisp\Bundle\GuestbookBundle\Entity\Post;
 use Willothewisp\Bundle\GuestbookBundle\Form\PostType;
@@ -25,7 +24,7 @@ class PostController extends Controller
      */
     public function indexAction()
     {
-        $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();;
+        $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
 
         $form = $this->createCreateForm(new Post());
 
@@ -43,63 +42,110 @@ class PostController extends Controller
     {
 
     }
+
     /**
-     * Creates a new Post entity.
-     *
+     * @param Request $request
+     * @return JsonResponse|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
-        $writeEnable = $this->get('willothewisp_guestbook_post.timer.post.timer')->accessCheck($request);
-
+        /** @var \Willothewisp\Bundle\GuestbookBundle\PostTimer\PostTimer $timer */
+        $timer = $this->get('willothewisp_guestbook_post.timer.post.timer');
         $isAjaxRequest = $request->isXmlHttpRequest();
+        $ajaxResponse = array(
+            'success' => false
+        );
 
-        if ($writeEnable) {
+        try {
+            if (!$timer->accessCheck($request)) {
+                throw new \Exception('You have already created message! Try again later! You can create the message once a minute.');
+            }
+
             $post = new Post();
             $form = $this->createCreateForm($post);
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $this->createPostProcess($request, $post);
+                $this->savePost($request, $post);
 
                 if ($isAjaxRequest) {
                     $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
-
-                    $response['success'] = true;
-                    $response['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
-                        'posts' => $posts,
+                    $ajaxResponse['success'] = true;
+                    $ajaxResponse['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
+                        'posts' => $posts
                     ));
-
-                    return new JsonResponse($response);
                 }
-                return  new RedirectResponse('/');
             } else {
-                if ($isAjaxRequest) {
-                    $response['errors'] = $this->getErrorMessages($form);
-                    $response['success'] = false;
-
-                    return new JsonResponse($response);
-                }
-                $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
-
-                return $this->render('WillothewispGuestbookBundle:Post:index.html.twig', array(
-                    'posts' => $posts,
-                    'form'   => $form->createView(),
-                ));
+                throw new \Exception($this->getErrorMessages($form));
             }
-        } else {
-            $request->getSession()->getFlashBag()->add(
-                'error',
-                'You have already created message! Try again later! You can create the message once a minute.'
-            );
-
+        } catch (\Exception $e) {
             if ($isAjaxRequest) {
-                $response['success'] = false;
-
-                return new JsonResponse($response);
+                $ajaxResponse['errors'] = $e->getMessage();
+            } else {
+                $request->getSession()->getFlashBag()->add('error', $e->getMessage());
             }
-
-            return  new RedirectResponse('/');
         }
+
+        return $isAjaxRequest ? new JsonResponse($ajaxResponse) : new RedirectResponse('/');
+
+
+
+//        if ($isAjaxRequest) {
+//
+//        }
+//
+//
+//
+//        if ($timer->accessCheck($request)) {
+//            $post = new Post();
+//            $form = $this->createCreateForm($post);
+//            $form->handleRequest($request);
+//
+//            if ($form->isValid()) {
+//                $this->savePost($request, $post);
+//                $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
+//
+//                if ($isAjaxRequest) {
+//                    $response['success'] = true;
+//                    $response['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
+//                        'posts' => $posts,
+//                    ));
+//
+//                    return new JsonResponse($response);
+//                }
+//
+//            } else {
+//                $response['errors'] = $this->getErrorMessages($form);
+//                $response['success'] = false;
+//                return new JsonResponse($response);
+//
+//                if ($isAjaxRequest) {
+//                    $response['errors'] = $this->getErrorMessages($form);
+//                    $response['success'] = false;
+//
+//                    return new JsonResponse($response);
+//                }
+//                $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
+//
+//                return $this->render('WillothewispGuestbookBundle:Post:index.html.twig', array(
+//                    'posts' => $posts,
+//                    'form'   => $form->createView(),
+//                ));
+//            }
+//        } else {
+//            $request->getSession()->getFlashBag()->add(
+//                'error',
+//                ''
+//            );
+//
+//            if ($isAjaxRequest) {
+//                $response['success'] = false;
+//
+//                return new JsonResponse($response);
+//            }
+//
+//            return  ;
+//        }
     }
 
     /**
@@ -340,7 +386,7 @@ class PostController extends Controller
         return $errors;
     }
 
-    private function createPostProcess(Request $request, $post)
+    private function savePost(Request $request, $post)
     {
         $session = $request->getSession();
 

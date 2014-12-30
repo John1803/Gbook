@@ -17,8 +17,7 @@ class PostRepository extends EntityRepository
         return $this->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function findPostsAssociatedWithAuthor($author)
@@ -27,8 +26,7 @@ class PostRepository extends EntityRepository
             ->where('p.author = :author')
             ->setParameter('author', $author)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function findPostsAssociatedWithDomain($url)
