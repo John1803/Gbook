@@ -48,7 +48,8 @@
     </div>
 {% endblock %}
 <div class="container">
-{% block flashMessage %}
+    <noscript><p style="background-color: red; text-align: center">Ваш браузер не поддерживает скрипты!</p></noscript>
+    {% block flashMessage %}
     {{ include('AretusaFlashBundle::flash-messages.html.twig') }}
 {% endblock %}
 {% block content %}

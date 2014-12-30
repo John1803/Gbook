@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Willothewisp\Bundle\GuestbookBundle\WillothewispGuestbookBundle(),
             new Aretusa\FlashBundle\AretusaFlashBundle(),
+            new Nomaya\SocialBundle\NomayaSocialBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
