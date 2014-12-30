@@ -5,7 +5,6 @@
 {% endif %}
 
 {% spaceless %}
-    <div class="g-plusone" data-size="{{size}}" data-annotation="{{annotation}}" data-width="{{width}}" data-href="http://gbook.loc"></div>
 
     <script type="text/javascript">
         window.___gcfg = {lang: '{{locale}}'};
@@ -16,5 +15,7 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
         })();
     </script>
+
+    <div class="g-plusone" data-size="{{size}}" data-annotation="{{annotation}}" data-width="{{width}}" data-href="http://{{url}}"></div>
 
 {% endspaceless %}
