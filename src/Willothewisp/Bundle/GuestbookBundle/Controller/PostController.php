@@ -3,12 +3,11 @@
 namespace Willothewisp\Bundle\GuestbookBundle\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 use Willothewisp\Bundle\GuestbookBundle\Entity\Post;
 use Willothewisp\Bundle\GuestbookBundle\Form\PostType;
@@ -50,111 +49,57 @@ class PostController extends Controller
      */
     public function createAction(Request $request)
     {
-        $post = new Post();
-        $post->setRating(5);
-        $form = $this->createCreateForm($post);
-        $form->handleRequest($request);
+        $writeEnable = $this->get('willothewisp_guestbook_post.timer.post.timer')->accessCheck($request);
 
-//        $ajaxRequest = $request->isXmlHttpRequest();
-//
-//        $response = $ajaxRequest  ? new JsonResponse() : new RedirectResponse('/');
+        $isAjaxRequest = $request->isXmlHttpRequest();
 
-        if ($form->isValid()) {
-            if ($request->isXmlHttpRequest()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($post);
-                $em->flush();
+        if ($writeEnable) {
+            $post = new Post();
+            $form = $this->createCreateForm($post);
+            $form->handleRequest($request);
 
+            if ($form->isValid()) {
+                $this->createPostProcess($request, $post);
+
+                if ($isAjaxRequest) {
+                    $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
+
+                    $response['success'] = true;
+                    $response['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
+                        'posts' => $posts,
+                    ));
+
+                    return new JsonResponse($response);
+                }
+                return  new RedirectResponse('/');
+            } else {
+                if ($isAjaxRequest) {
+                    $response['errors'] = $this->getErrorMessages($form);
+                    $response['success'] = false;
+
+                    return new JsonResponse($response);
+                }
                 $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
 
-                $request->getSession()->getFlashBag()->add(
-                    'success',
-                    'Congradulation! Your message was saved! Would you like to add one more message'
-                );
-
-                $response['success'] = true;
-                $response['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
+                return $this->render('WillothewispGuestbookBundle:Post:index.html.twig', array(
                     'posts' => $posts,
-                ));
-                return new JsonResponse($response);
-
-            } else {
-                $result = $this->get('willothewisp_guestbook_post.timer.post.timer')->requestProcess($request);
-                if ($result['doSave']) {
-                    $request->getSession()->getFlashBag()->add(
-                        'notice',
-                        $result['message']
-                    );
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($post);
-                    $em->flush();
-                }
-                $request->getSession()->getFlashBag()->add(
-                    'notice',
-                    $result['message']
-                );
-                return $result['response'];
-            }
-//            $result = $this->get('willothewisp_guestbook_post.timer.post.timer')->requestProcess($request, $response);
-//
-//            if ($result['doSave']) {
-//                $request->getSession()->getFlashBag()->add(
-//                    'success',
-//                    $result['message']
-//                );
-//
-//                $em = $this->getDoctrine()->getManager();
-//                $em->persist($post);
-//                $em->flush();
-//
-//                if ($withAjax) {
-//                    $result['success'] = true;
-//
-//                    $posts = $this->get('willothewisp_guestbook.post.repository')->findNewest();
-//
-//                    $result['html'] = $this->renderView('WillothewispGuestbookBundle:Post:tbody.html.twig', array(
-//                        'posts' => $posts,
-//                    ));
-//
-//                    $response->setData($result);
-//                }
-//
-//                return $response;
-//
-//            } else {
-//
-//                if ($withAjax) {
-//                    $result['success'] = false;
-//                }
-//
-//                $request->getSession()->getFlashBag()->add(
-//                    'error',
-//                    $result['message']
-//                );
-//
-//                return $response;
-//            }
-//
-//        } else {
-//
-//            if ($withAjax) {
-//                $result['errors'] = $this->getErrorMessages($form);
-//                $result['success'] = false;
-//
-//                $response->setData($result);
-//                return $response;
-//
-//            } else {
-//                return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(
-//                    'post' => $post,
-//                    'form'   => $form->createView(),
-//                ));
-            }
-
-                return $this->render('WillothewispGuestbookBundle:Post:new.html.twig', array(
-                    'post' => $post,
                     'form'   => $form->createView(),
                 ));
+            }
+        } else {
+            $request->getSession()->getFlashBag()->add(
+                'error',
+                'You have already created message! Try again later! You can create the message once a minute.'
+            );
+
+            if ($isAjaxRequest) {
+                $response['success'] = false;
+
+                return new JsonResponse($response);
+            }
+
+            return  new RedirectResponse('/');
+        }
     }
 
     /**
@@ -393,5 +338,23 @@ class PostController extends Controller
         }
 
         return $errors;
+    }
+
+    private function createPostProcess(Request $request, $post)
+    {
+        $session = $request->getSession();
+
+        $request->getSession()->getFlashBag()->add(
+            'success',
+            'Congratulations! Your message was saved! You can create new message after 1 minute!'
+        );
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($post);
+        $em->flush();
+
+        $timeNow = new \DateTime('now');
+        $session->set('createLastPost', $timeNow);
+
     }
 }

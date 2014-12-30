@@ -13,5 +13,5 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface PostTimerInterface
 {
-    public function requestProcess(Request $request);
+    public function requestProcess(Request $request, $response);
 }
